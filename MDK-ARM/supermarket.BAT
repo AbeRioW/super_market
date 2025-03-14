@@ -1,0 +1,32 @@
+SET PATH=C:\Program Files (x86)\Keil_v5\ARM\ARMCC\Bin;C:\GNU Arm Embedded Toolchain\10 2020-q4-major\bin;C:\Windows\system32;C:\Windows;C:\Windows\system32\wbem;C:\Users\Administrator\AppData\Local\Microsoft\WindowsApps;;D:\ProgramFiles\Microsoft VS Code\bin;C:\Users\Administrator\AppData\Local\Programs\STM32CubeMX\.\jre\\bin
+SET CPU_TYPE=STM32F103C8
+SET CPU_VENDOR=STMicroelectronics
+SET UV2_TARGET=supermarket
+SET CPU_CLOCK=0x007A1200
+"C:\Program Files (x86)\Keil_v5\ARM\ARMCC\Bin\ArmAsm" --Via "supermarket\startup_stm32f103xb._ia"
+"C:\Program Files (x86)\Keil_v5\ARM\ARMCC\Bin\ArmCC" --Via "supermarket\main.__i"
+"C:\Program Files (x86)\Keil_v5\ARM\ARMCC\Bin\ArmCC" --Via "supermarket\gpio.__i"
+"C:\Program Files (x86)\Keil_v5\ARM\ARMCC\Bin\ArmCC" --Via "supermarket\spi.__i"
+"C:\Program Files (x86)\Keil_v5\ARM\ARMCC\Bin\ArmCC" --Via "supermarket\usart.__i"
+"C:\Program Files (x86)\Keil_v5\ARM\ARMCC\Bin\ArmCC" --Via "supermarket\stm32f1xx_it.__i"
+"C:\Program Files (x86)\Keil_v5\ARM\ARMCC\Bin\ArmCC" --Via "supermarket\stm32f1xx_hal_msp.__i"
+"C:\Program Files (x86)\Keil_v5\ARM\ARMCC\Bin\ArmCC" --Via "supermarket\stm32f1xx_hal_gpio_ex.__i"
+"C:\Program Files (x86)\Keil_v5\ARM\ARMCC\Bin\ArmCC" --Via "supermarket\stm32f1xx_hal_spi.__i"
+"C:\Program Files (x86)\Keil_v5\ARM\ARMCC\Bin\ArmCC" --Via "supermarket\stm32f1xx_hal.__i"
+"C:\Program Files (x86)\Keil_v5\ARM\ARMCC\Bin\ArmCC" --Via "supermarket\stm32f1xx_hal_rcc.__i"
+"C:\Program Files (x86)\Keil_v5\ARM\ARMCC\Bin\ArmCC" --Via "supermarket\stm32f1xx_hal_rcc_ex.__i"
+"C:\Program Files (x86)\Keil_v5\ARM\ARMCC\Bin\ArmCC" --Via "supermarket\stm32f1xx_hal_gpio.__i"
+"C:\Program Files (x86)\Keil_v5\ARM\ARMCC\Bin\ArmCC" --Via "supermarket\stm32f1xx_hal_dma.__i"
+"C:\Program Files (x86)\Keil_v5\ARM\ARMCC\Bin\ArmCC" --Via "supermarket\stm32f1xx_hal_cortex.__i"
+"C:\Program Files (x86)\Keil_v5\ARM\ARMCC\Bin\ArmCC" --Via "supermarket\stm32f1xx_hal_pwr.__i"
+"C:\Program Files (x86)\Keil_v5\ARM\ARMCC\Bin\ArmCC" --Via "supermarket\stm32f1xx_hal_flash.__i"
+"C:\Program Files (x86)\Keil_v5\ARM\ARMCC\Bin\ArmCC" --Via "supermarket\stm32f1xx_hal_flash_ex.__i"
+"C:\Program Files (x86)\Keil_v5\ARM\ARMCC\Bin\ArmCC" --Via "supermarket\stm32f1xx_hal_exti.__i"
+"C:\Program Files (x86)\Keil_v5\ARM\ARMCC\Bin\ArmCC" --Via "supermarket\stm32f1xx_hal_tim.__i"
+"C:\Program Files (x86)\Keil_v5\ARM\ARMCC\Bin\ArmCC" --Via "supermarket\stm32f1xx_hal_tim_ex.__i"
+"C:\Program Files (x86)\Keil_v5\ARM\ARMCC\Bin\ArmCC" --Via "supermarket\stm32f1xx_hal_uart.__i"
+"C:\Program Files (x86)\Keil_v5\ARM\ARMCC\Bin\ArmCC" --Via "supermarket\system_stm32f1xx.__i"
+"C:\Program Files (x86)\Keil_v5\ARM\ARMCC\Bin\ArmCC" --Via "supermarket\rc522.__i"
+"C:\Program Files (x86)\Keil_v5\ARM\ARMCC\Bin\ArmCC" --Via "supermarket\oled.__i"
+"C:\Program Files (x86)\Keil_v5\ARM\ARMCC\Bin\ArmLink" --Via "supermarket\supermarket.lnp"
+"C:\Program Files (x86)\Keil_v5\ARM\ARMCC\Bin\fromelf.exe" "supermarket\supermarket.axf" --i32combined --output "supermarket\supermarket.hex"
