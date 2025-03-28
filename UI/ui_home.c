@@ -13,11 +13,11 @@ void ui_home(void)
 	  uint8_t cardid[4]={0x00,0x00,0x00,0x00};
 	  uint8_t comp_data[4]={0xff,0xff,0xff,0xff};
 		char show_price[10]={0x00};
-		OLED_ShowString(15,10,(uint8_t*)"Wait For Near",16,1);
-		OLED_ShowString(80,50,(uint8_t*)"Setting",8,1);
 		while(1)
 		{
 			  
+					OLED_ShowString(15,10,(uint8_t*)"Wait For Near",16,1);
+				OLED_ShowString(80,50,(uint8_t*)"Setting",8,1);
 				OLED_ShowString(30,30,(uint8_t*)" <<>> ",16,1);
 			  OLED_Refresh();
 				HAL_Delay(200);
@@ -43,8 +43,8 @@ void ui_home(void)
 		 }
 		 status = PCD_Anticoll(cardid);
 		 
-		 									OLED_Clear();
-									OLED_ShowString(30,30,(uint8_t*)"hellos",16,1);
+		 OLED_Clear();
+			OLED_ShowString(30,30,(uint8_t*)"hellos",16,1);
 									OLED_Refresh();
 									HAL_Delay(300);
 		 

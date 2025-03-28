@@ -21,30 +21,34 @@ Target DLL:      CMSIS_AGDI.dll V1.33.15.0
 Dialog DLL:      TCM.DLL V1.56.4.0
  
 <h2>Project:</h2>
-C:\Users\dell\Desktop\supermarket\supermarket\MDK-ARM\supermarket.uvprojx
-Project File Date:  03/05/2025
+C:\Users\dell\Desktop\123\super_market\MDK-ARM\supermarket.uvprojx
+Project File Date:  03/28/2025
 
 <h2>Output:</h2>
 *** Using Compiler 'V5.06 update 6 (build 750)', folder: 'D:\programFiles\KEIL5\ARM\ARMCC\Bin'
 Build target 'supermarket'
-compiling ui_home.c...
-../app/oled.h(44): warning:  #1-D: last line of file ends without a newline
-  #endif
-..\UI\ui_setting.h(8): warning:  #1-D: last line of file ends without a newline
-  #endif
+compiling main.c...
 ../app/RC522.h(151): warning:  #1-D: last line of file ends without a newline
   #endif
-..\UI\ui_home.c(87): warning:  #1-D: last line of file ends without a newline
-  }
-..\UI\ui_home.c(11): warning:  #177-D: variable "i"  was declared but never referenced
-  	  uint8_t status,i;
-..\UI\ui_home.c(15): warning:  #177-D: variable "show_price"  was declared but never referenced
-  		char show_price[10]={0x00};
-..\UI\ui_home.c: 6 warnings, 0 errors
+../app/oled.h(44): warning:  #1-D: last line of file ends without a newline
+  #endif
+../UI/ui_welcome.h(7): warning:  #1-D: last line of file ends without a newline
+  #endif
+../UI/ui_setting.h(8): warning:  #1-D: last line of file ends without a newline
+  #endif
+../Core/Src/main.c(77): warning:  #177-D: variable "flash_data"  was declared but never referenced
+     uint16_t flash_data[6];
+../Core/Src/main.c: 5 warnings, 0 errors
+compiling stm_flash.c...
+../app/oled.h(44): warning:  #1-D: last line of file ends without a newline
+  #endif
+../UI/ui_setting.h(8): warning:  #1-D: last line of file ends without a newline
+  #endif
+..\app\stm_flash.c: 2 warnings, 0 errors
 linking...
-Program Size: Code=9980 RO-data=8056 RW-data=80 ZI-data=2424  
+Program Size: Code=10640 RO-data=8056 RW-data=80 ZI-data=2456  
 FromELF: creating hex file...
-"supermarket\supermarket.axf" - 0 Error(s), 6 Warning(s).
+"supermarket\supermarket.axf" - 0 Error(s), 7 Warning(s).
 
 <h2>Software Packages used:</h2>
 
@@ -68,7 +72,7 @@ Package Vendor: Keil
 
    * Component: ARM::CMSIS:CORE:5.6.0
       Include file:  CMSIS/Core/Include/tz_context.h
-Build Time Elapsed:  00:00:01
+Build Time Elapsed:  00:00:03
 </pre>
 </body>
 </html>

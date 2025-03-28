@@ -75,6 +75,7 @@ int main(void)
 {
   /* USER CODE BEGIN 1 */
    uint16_t flash_data[6];
+	  uint16_t test_data = 0x1122;
   /* USER CODE END 1 */
 
   /* MCU Configuration--------------------------------------------------------*/
@@ -90,7 +91,6 @@ int main(void)
   SystemClock_Config();
 
   /* USER CODE BEGIN SysInit */
-  copy_nfc_message(STM32_FLASH_BASE+STM32_SECTOR_SIZE*60,nfc_card);
   /* USER CODE END SysInit */
 
   /* Initialize all configured peripherals */
@@ -108,8 +108,6 @@ int main(void)
   PCD_AntennaOn(); 
 		 
 		 //上电后读出FLASH中数据
-
-
     ui_welcome();
   /* USER CODE END 2 */
 

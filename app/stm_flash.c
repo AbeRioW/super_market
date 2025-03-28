@@ -1,123 +1,81 @@
 #include "stm_flash.h"
 #include "stm32f1xx_hal_flash_ex.h"
 
-
-typedef __IO uint16_t vu16;
-static uint16_t stmflash_readHalfWord(uint32_t addr)
+//读指定地址的半字(16位数据)
+uint16_t FLASH_ReadHalfWord(uint32_t addr)
 {
-		return *(vu16*)addr;
+		return *(__IO uint16_t*)addr;
 }
 
-static uint8_t stmflash_get_error_status(void)
+// 读取指定地址的单字(32位数据)
+uint32_t FLASH_ReadWord(uint32_t address)
 {
-		uint32_t res;
-	  
-		res = FLASH->SR;
-	  
-	  if(res&(1<<0)) return 1;   //bus=1,忙
-		if(res&(1<<2)) return 2;   //PGEER=1,编程错误
-	  if(res&(1<<4)) return 3;   //WRPRTERR = 1,写保护错误 
+    return *(__IO uint32_t*)address;
 }
 
-static uint8_t stmflash_wait_done(uint32_t time)
+// 读取指定地址的双字(64位数据)
+uint64_t FLASH_ReadDoubleWord(uint32_t address)
 {
-		uint8_t res;
-	  
-	   do{
-				res = stmflash_get_error_status();
-			  if(res!=1)
-				{
-					break;   //非忙无需等待直接退出
-				}
-				
-				time--;
-		 }while(time);
-		 
-		 if(time ==0)
-			 res= 0xff;
-		 
-		 return res;
+    return *(__IO uint64_t*)address;
 }
 
-uint8_t stm_flash_erase_sector(uint32_t saddr){
-	uint8_t res = 0;
-	res = stmflash_wait_done(0x5fffffff);   //等待上次操作完毕,>20ms
-	if(res==0)
-	{
-			FLASH->CR |= 1<<1; //页擦除
-			FLASH->AR = saddr;     //设置页地址(实际是半字地址)
-		  FLASH->CR |= 1<<6;   //开始擦除
-		  res = stmflash_wait_done(0x5fffffff);
-		   
-		  if(res!=1)
-			{
-					FLASH->CR &= ~(1<<1);   //清除页擦除标志
-			}
-	}
-	
-	return res;
-}
-
-void flash_write(uint32_t writeaddr,uint16_t *pbuffer,uint16_t num)
+// 从指定地址开始读取多个数据（16位数据）
+void FLASH_ReadHalfWordData(uint32_t startAddress, uint16_t *readData, uint16_t countToRead)
 {
-		uint16_t i;
-	  HAL_FLASH_Unlock();
-	  for(i=0;i<num;i++)
-		{
-			  
-				HAL_FLASH_Program(FLASH_TYPEPROGRAM_HALFWORD,writeaddr,pbuffer[i]);
-			  writeaddr+=2; //地址加2
-		}
-		HAL_FLASH_Lock();
+    uint16_t dataIndex;
+    for (dataIndex = 0; dataIndex < countToRead; dataIndex++)
+    {
+        readData[dataIndex] = FLASH_ReadHalfWord(startAddress + dataIndex * 2);
+    }
 }
 
-void flash_read(uint32_t readaddr,uint16_t *pbuffer,uint16_t num)
+// 从指定地址开始读取多个数据（32位数据）
+void FLASH_ReadWordData(uint32_t startAddress, uint32_t *readData, uint16_t countToRead)
 {
-		uint16_t i;
-	  for(i=0;i<num;i++)
-		{
-			  pbuffer[i]=stmflash_readHalfWord(readaddr);
-			  readaddr+=2; //地址加2
-		}
+    uint16_t dataIndex;
+    for (dataIndex = 0; dataIndex < countToRead; dataIndex++)
+    {
+        readData[dataIndex] = FLASH_ReadWord(startAddress + dataIndex * 4);
+    }
 }
 
-///////////////////////////////////////////////////////////
-//flash读出数据,后进行赋值
-//STM32_FLASH_BASE+STM32_SECTOR_SIZE*60
-void copy_nfc_message(uint32_t readaddr,rfid temp[2])
+// 从指定地址开始读取多个数据（64位数据）
+void FLASH_ReadDoubleWordData(uint32_t startAddress, uint64_t *readData, uint16_t countToRead)
 {
-
-	  uint16_t * buffer;
-	  int num;
-	  flash_read(readaddr,buffer,num);
-	
-	  temp[0].id[0] = (uint8_t)(buffer[0]>>8);
-		temp[0].id[1] = (uint8_t)(buffer[0]);
-
-	  temp[0].id[2] = (uint8_t)(buffer[1]>>8);
-		temp[0].id[3] = (uint8_t)(buffer[1]);
-	
-		temp[0].price = buffer[2];
-	
-		temp[1].id[0] = (uint8_t)(buffer[3]>>8);
-		temp[1].id[1] = (uint8_t)(buffer[3]);
-
-	  temp[1].id[2] = (uint8_t)(buffer[4]>>8);
-		temp[1].id[3] = (uint8_t)(buffer[4]);
-	
-		temp[1].price = buffer[5];
-		
+    uint16_t dataIndex;
+    for (dataIndex = 0; dataIndex < countToRead; dataIndex++)
+    {
+        readData[dataIndex] = FLASH_ReadDoubleWord(startAddress + dataIndex * 8);
+    }
 }
 
-
-void write_nfc_message(uint32_t readaddr,rfid nfc)
-{
-	   uint16_t flash_buf[3]= {0xffff,0xffff,0xffff};
-	   flash_buf[0]=(nfc.id[0]<<8)+(nfc.id[1]);
-		 flash_buf[1]=(nfc.id[2]<<8)+(nfc.id[3]);
-		 flash_buf[2]=nfc.price;
-		 stm_flash_erase_sector(readaddr);
-	   flash_write(STM32_FLASH_BASE+STM32_SECTOR_SIZE*60,flash_buf,3);
+//Flash写入
+void Flash_Write(uint32_t address, uint16_t *data, uint16_t length) {
+    HAL_FLASH_Unlock();
+    
+    // 擦除需要的页
+    FLASH_EraseInitTypeDef EraseInitStruct;
+    uint32_t PageError = 0;
+    
+    EraseInitStruct.TypeErase = FLASH_TYPEERASE_PAGES;
+    EraseInitStruct.PageAddress = address;
+    EraseInitStruct.NbPages = ((length * 2) + FLASH_PAGE_SIZE - 1) / FLASH_PAGE_SIZE;
+    
+    if (HAL_FLASHEx_Erase(&EraseInitStruct, &PageError) != HAL_OK) {
+        // 擦除错误处理
+        HAL_FLASH_Lock();
+        return;
+    }
+    
+    // 写入数据
+    for(uint16_t i = 0; i < length; i++) {
+        if (HAL_FLASH_Program(FLASH_TYPEPROGRAM_HALFWORD, 
+                             address + (i * 2), 
+                             data[i]) != HAL_OK) {
+            // 写入错误处理
+            break;
+        }
+    }
+    
+    HAL_FLASH_Lock();
 }
-
-
