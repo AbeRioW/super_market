@@ -4,7 +4,9 @@
 #include "ui_welcome.h"
 #include "ui_home.h"
 #include "string.h"
-
+#include "main.h"
+#include "stm_flash.h"
+#include "ui_welcome.h"
 static void handle_product_price(void);
 
 void ui_setting(void)
@@ -14,8 +16,7 @@ void ui_setting(void)
 	  while(1)
 		{
 				OLED_ShowString(15,10,(uint8_t*)"set product price",8,position==0?0:1);
-				OLED_ShowString(15,20,(uint8_t*)"set admin pin",8,position==1?0:1);
-				OLED_ShowString(15,30,(uint8_t*)"back to home",8,position==2?0:1);
+				OLED_ShowString(15,30,(uint8_t*)"back to home",8,position==1?0:1);
 				OLED_Refresh();
 				 if(button==DOWN_BUTTON)
 				 {
@@ -23,7 +24,7 @@ void ui_setting(void)
 					  button = UNPRESSED;
 					  HAL_Delay(100);
 						position++;
-					  if(position >2)
+					  if(position >1)
 						{
 								position=0;
 						}
@@ -37,7 +38,7 @@ void ui_setting(void)
 						position--;
 					  if(position <0)
 						{
-								position=2;
+								position=1;
 						}
 				 }
 				 
@@ -45,7 +46,7 @@ void ui_setting(void)
 				 {
 
 					  button = UNPRESSED;
-					  HAL_Delay(100);
+					  HAL_Delay(300);
 						switch(position)
 						{
 							case 0:
@@ -53,18 +54,20 @@ void ui_setting(void)
 								 handle_product_price();
 								break;
 							case 1:
-								break;
-							case 2:
-								 OLED_Clear();
+									OLED_Clear();
 								 return ;
 								break;
 						}
+						break;
 				 }
 		}
+		OLED_Clear();
+		ui_home();
 }
 
 static void handle_product_price(void)
 {
+	   uint16_t price_save[2]={0,0};
 	   rfid mfc_id;
 	   uint8_t status;
 	   uint8_t g_ucTempbuf[20]; 
@@ -72,6 +75,9 @@ static void handle_product_price(void)
 		int position=0;
 	  int price = 3;
 	  char price_show[10]={0x00};
+		
+							  button = UNPRESSED;
+		HAL_Delay(300);
 	  while(1)
 		{
 				OLED_ShowString(15,10,(uint8_t*)"please input price",8,1);
@@ -137,12 +143,25 @@ static void handle_product_price(void)
 				}
 				
 				status = PCD_Anticoll(cardid);
-				
-				//进行赋值操作
-				memcpy(mfc_id.id,cardid,4);
-				mfc_id.price = price;
-				
 				printf("%02x %02x %02x %02x \r\n",cardid[0],cardid[1],cardid[2],cardid[3]);
+				//进行赋值操作
+				for(int i=0;i<2;i++)
+				{
+						if(memcmp(nfc_card[i].id,cardid,4)==0)
+						{
+								printf("yes\r\n");
+							  nfc_card[i].price = price;
+							  price_save[0]=nfc_card[0].price;
+								price_save[1]=nfc_card[1].price;
+							  Flash_Write(STM32_FLASH_BASE+STM32_SECTOR_SIZE*USER_FLASH_PAGE,price_save,2);
+								printf("%02x %02x %02x %02x \r\n",cardid[0],cardid[1],cardid[2],cardid[3]);
+							  break;
+						}
+				}
+
+				break;
 				
 		}
+		
+
 }

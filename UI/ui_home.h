@@ -6,10 +6,14 @@
 #include "ui_setting.h"
 
 
+
+
 typedef struct Rfid{
 	uint8_t id[4];
 	uint16_t price;
 }rfid;
+
+extern rfid nfc_card[2];
 
 void ui_home(void);
 

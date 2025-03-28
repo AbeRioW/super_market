@@ -64,7 +64,7 @@ void SystemClock_Config(void);
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
-rfid nfc_card[2];
+
 /* USER CODE END 0 */
 
 /**
@@ -74,7 +74,7 @@ rfid nfc_card[2];
 int main(void)
 {
   /* USER CODE BEGIN 1 */
-   uint16_t flash_data[6];
+   uint16_t flash_data[2];
 	  uint16_t test_data = 0x1122;
   /* USER CODE END 1 */
 
@@ -108,7 +108,11 @@ int main(void)
   PCD_AntennaOn(); 
 		 
 		 //上电后读出FLASH中数据
-    ui_welcome();
+		 FLASH_ReadHalfWordData(STM32_FLASH_BASE+STM32_SECTOR_SIZE*USER_FLASH_PAGE,flash_data,2);
+		 nfc_card[0].price =flash_data[0];
+		 nfc_card[1].price = flash_data[1];
+   ui_welcome();
+	//ui_setting();
   /* USER CODE END 2 */
 
   /* Infinite loop */

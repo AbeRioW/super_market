@@ -7,7 +7,7 @@
 #define STM32_FLASH_SIZE 				64  				//FLASH的页数
 #define STM32_SECTOR_SIZE 		1024 					//一页的大小
 #define STM32_FLASH_BASE 0x08000000  				//flash起始地址
-#define USER_FLASH_SIZE 				63  				//FLASH的页数
+#define USER_FLASH_PAGE 				62  				//FLASH的页数
 
 uint16_t FLASH_ReadHalfWord(uint32_t addr);
 uint32_t FLASH_ReadWord(uint32_t address);

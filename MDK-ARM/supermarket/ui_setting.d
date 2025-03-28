@@ -36,3 +36,4 @@ supermarket\ui_setting.o: ../Core/Inc/spi.h
 supermarket\ui_setting.o: ..\UI\ui_welcome.h
 supermarket\ui_setting.o: ..\UI\ui_home.h
 supermarket\ui_setting.o: D:\programFiles\KEIL5\ARM\ARMCC\Bin\..\include\string.h
+supermarket\ui_setting.o: ../app/stm_flash.h
