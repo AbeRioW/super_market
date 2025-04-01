@@ -3,20 +3,26 @@
 #include "stdio.h"
 #include "string.h"
 #include "usart.h"
+#include "stdbool.h"
 
 
 
 //两站卡的ID:D2C7B205  13D08608
-rfid nfc_card[2]={{{0xd2,0xc7,0xb2,0x05},0},{{0x13,0xd0,0x86,0x08},0}};
+rfid nfc_card[4]={{{0x54,0x2b,0x1d,0x05},0},{{0x03,0x1c,0x1a,0x05},0},{{0xae,0x41,0x1d,0x05},0},{{0x51,0xb3,0x19,0x05},0}};
+uint8_t youhui_card[4]={0xd2,0xc7,0xb2,0x05};
+uint8_t jiesuan_card[4]={0x13,0xD0,0x86,0x08};
 
 void ui_home(void)
 {
+	  bool  discount = false;
+	  float money=0;;
+	  uint16_t card_price=0;
 	  char show_id[20];
 	  uint8_t status,i;
 		uint8_t g_ucTempbuf[20]; 
 	  uint8_t cardid[4]={0x00,0x00,0x00,0x00};
 	  uint8_t comp_data[4]={0xff,0xff,0xff,0xff};
-		char show_price[10]={0x00};
+		char show_price[10]={0x00},show_all[20]={0};
 		while(1)
 		{
 			  
@@ -47,14 +53,14 @@ void ui_home(void)
 			  continue;
 		 }
 		 status = PCD_Anticoll(cardid);
-		 sprintf(show_id,"%02x%02x%02x%02x",cardid[0],cardid[1],cardid[2],cardid[3]);
-		 
+//		 sprintf(show_id,"%02x%02x%02x%02x",cardid[0],cardid[1],cardid[2],cardid[3]);
+//		 
 //		 OLED_Clear();
 //		 OLED_ShowString(30,30,(uint8_t*)show_id,16,1);
 //		 OLED_Refresh();
 //		 HAL_Delay(300);
 		 
-		 for(int i=0;i<2;i++)
+		 for(int i=0;i<4;i++)
 		 {
 				if(memcmp(cardid,nfc_card[i].id,4)==0)
 				{
@@ -62,23 +68,55 @@ void ui_home(void)
 									sprintf(show_price,"price:%04x",nfc_card[i].price);
 									OLED_Clear();
 									OLED_ShowString(30,30,(uint8_t*)show_price,16,1);
-									OLED_Refresh();
-
+									OLED_Refresh();                 
+									card_price+=nfc_card[i].price;      //价格进行累加
+									HAL_Delay(1000);
+									OLED_Clear();
 									
-									price_send[0]=(nfc_card[i].price>>8)&0xff;
-									price_send[1]=nfc_card[i].price&0xff;
-					        HAL_UART_Transmit(&huart3,price_send,2,0xffff);
-									printf("hello\r\n");
-																		HAL_Delay(3000);
-					        OLED_Clear();
+//									price_send[0]=(nfc_card[i].price>>8)&0xff;
+//									price_send[1]=nfc_card[i].price&0xff;
+//					        HAL_UART_Transmit(&huart3,price_send,2,0xffff);
+//									printf("hello\r\n");
+//																		HAL_Delay(3000);
+//					        OLED_Clear();
 				}
 				
+		 }
+		 
+		 if(memcmp(cardid,youhui_card,4)==0)  //刷了优惠卡
+		 {
+			  discount = true;
+				OLED_Clear();
+				OLED_ShowString(30,30,(uint8_t*)"discount card",8,1);
+				OLED_Refresh(); 
+        HAL_Delay(1000);
+				OLED_Clear();			 
+		 }
+		 
+		 if(memcmp(cardid,jiesuan_card,4)==0)  //刷了优惠卡
+		 {		 
+			   if(discount)
+				 {
+						money = (float)card_price*0.8;
+				 }
+				 else
+				 {
+						money = (float)card_price;
+				 }
+				 sprintf(show_all,"settlement:%.2f",money);
+				 
+				 				OLED_Clear();
+				OLED_ShowString(30,30,(uint8_t*)show_all,8,1);
+				 HAL_UART_Transmit(&huart3,(uint8_t*)show_all,sizeof(show_all),0xffff);
+				OLED_Refresh(); 
+        HAL_Delay(1000);
+				OLED_Clear();	
 		 }
 		 
 		}
 		
 		//进入设置页面
-								button = UNPRESSED;
+		button = UNPRESSED;
 		ui_setting();
 
 }

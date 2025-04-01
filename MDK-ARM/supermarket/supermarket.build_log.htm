@@ -21,28 +21,28 @@ Target DLL:      CMSIS_AGDI.dll V1.33.15.0
 Dialog DLL:      TCM.DLL V1.56.4.0
  
 <h2>Project:</h2>
-C:\Users\dell\Desktop\123\super_market\MDK-ARM\supermarket.uvprojx
-Project File Date:  03/28/2025
+C:\Users\dell\Desktop\git\super_market\MDK-ARM\supermarket.uvprojx
+Project File Date:  04/01/2025
 
 <h2>Output:</h2>
 *** Using Compiler 'V5.06 update 6 (build 750)', folder: 'D:\programFiles\KEIL5\ARM\ARMCC\Bin'
 Build target 'supermarket'
-compiling ui_home.c...
+compiling ui_setting.c...
 ../app/oled.h(44): warning:  #1-D: last line of file ends without a newline
   #endif
 ..\UI\ui_setting.h(8): warning:  #1-D: last line of file ends without a newline
   #endif
 ../app/RC522.h(151): warning:  #1-D: last line of file ends without a newline
   #endif
-..\UI\ui_home.c(84): warning:  #1-D: last line of file ends without a newline
-  }
-..\UI\ui_home.c(15): warning:  #177-D: variable "i"  was declared but never referenced
-  	  uint8_t status,i;
-..\UI\ui_home.c(18): warning:  #177-D: variable "comp_data"  was declared but never referenced
-  	  uint8_t comp_data[4]={0xff,0xff,0xff,0xff};
-..\UI\ui_home.c: 6 warnings, 0 errors
+..\UI\ui_welcome.h(10): warning:  #1-D: last line of file ends without a newline
+  #endif
+..\UI\ui_setting.c(59): warning:  #111-D: statement is unreachable
+  								break;
+..\UI\ui_setting.c(71): warning:  #177-D: variable "mfc_id"  was declared but never referenced
+  	   rfid mfc_id;
+..\UI\ui_setting.c: 6 warnings, 0 errors
 linking...
-Program Size: Code=10752 RO-data=8056 RW-data=92 ZI-data=2444  
+Program Size: Code=13412 RO-data=8056 RW-data=112 ZI-data=2440  
 FromELF: creating hex file...
 "supermarket\supermarket.axf" - 0 Error(s), 6 Warning(s).
 
@@ -68,7 +68,7 @@ Package Vendor: Keil
 
    * Component: ARM::CMSIS:CORE:5.6.0
       Include file:  CMSIS/Core/Include/tz_context.h
-Build Time Elapsed:  00:00:01
+Build Time Elapsed:  00:00:02
 </pre>
 </body>
 </html>

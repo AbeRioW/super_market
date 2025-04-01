@@ -67,7 +67,7 @@ void ui_setting(void)
 
 static void handle_product_price(void)
 {
-	   uint16_t price_save[2]={0,0};
+	   uint16_t price_save[4]={0,0,0,0};
 	   rfid mfc_id;
 	   uint8_t status;
 	   uint8_t g_ucTempbuf[20]; 
@@ -145,7 +145,7 @@ static void handle_product_price(void)
 				status = PCD_Anticoll(cardid);
 				printf("%02x %02x %02x %02x \r\n",cardid[0],cardid[1],cardid[2],cardid[3]);
 				//进行赋值操作
-				for(int i=0;i<2;i++)
+				for(int i=0;i<4;i++)
 				{
 						if(memcmp(nfc_card[i].id,cardid,4)==0)
 						{
@@ -153,7 +153,9 @@ static void handle_product_price(void)
 							  nfc_card[i].price = price;
 							  price_save[0]=nfc_card[0].price;
 								price_save[1]=nfc_card[1].price;
-							  Flash_Write(STM32_FLASH_BASE+STM32_SECTOR_SIZE*USER_FLASH_PAGE,price_save,2);
+							  price_save[2]=nfc_card[2].price;
+								price_save[3]=nfc_card[3].price;
+							  Flash_Write(STM32_FLASH_BASE+STM32_SECTOR_SIZE*USER_FLASH_PAGE,price_save,4);
 								printf("%02x %02x %02x %02x \r\n",cardid[0],cardid[1],cardid[2],cardid[3]);
 							  break;
 						}

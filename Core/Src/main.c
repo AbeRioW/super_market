@@ -74,7 +74,7 @@ void SystemClock_Config(void);
 int main(void)
 {
   /* USER CODE BEGIN 1 */
-   uint16_t flash_data[2];
+   uint16_t flash_data[4];
 	  uint16_t test_data = 0x1122;
   /* USER CODE END 1 */
 
@@ -108,11 +108,14 @@ int main(void)
   PCD_AntennaOn(); 
 		 
 		 //上电后读出FLASH中数据
-		 FLASH_ReadHalfWordData(STM32_FLASH_BASE+STM32_SECTOR_SIZE*USER_FLASH_PAGE,flash_data,2);
+		 FLASH_ReadHalfWordData(STM32_FLASH_BASE+STM32_SECTOR_SIZE*USER_FLASH_PAGE,flash_data,4);
 		 nfc_card[0].price =flash_data[0];
 		 nfc_card[1].price = flash_data[1];
+		 nfc_card[2].price =flash_data[2];
+		 nfc_card[3].price = flash_data[3];
    ui_welcome();
 	//ui_setting();
+	// ui_home();
   /* USER CODE END 2 */
 
   /* Infinite loop */

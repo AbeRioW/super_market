@@ -13,7 +13,7 @@ typedef struct Rfid{
 	uint16_t price;
 }rfid;
 
-extern rfid nfc_card[2];
+extern rfid nfc_card[4];
 
 void ui_home(void);
 

@@ -36,3 +36,4 @@ supermarket\ui_home.o: ../Core/Inc/spi.h
 supermarket\ui_home.o: D:\programFiles\KEIL5\ARM\ARMCC\Bin\..\include\stdio.h
 supermarket\ui_home.o: D:\programFiles\KEIL5\ARM\ARMCC\Bin\..\include\string.h
 supermarket\ui_home.o: ../Core/Inc/usart.h
+supermarket\ui_home.o: D:\programFiles\KEIL5\ARM\ARMCC\Bin\..\include\stdbool.h
