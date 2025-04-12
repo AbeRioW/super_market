@@ -3,9 +3,9 @@
 <title>Static Call Graph - [supermarket\supermarket.axf]</title></head>
 <body><HR>
 <H1>Static Call Graph for image supermarket\supermarket.axf</H1><HR>
-<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060750: Last Updated: Tue Apr 01 17:08:02 2025
+<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5050106: Last Updated: Sat Apr 12 09:27:22 2025
 <BR><P>
-<H3>Maximum Stack Usage =        544 bytes + Unknown(Cycles, Untraceable Function Pointers)</H3><H3>
+<H3>Maximum Stack Usage =        576 bytes + Unknown(Cycles, Untraceable Function Pointers)</H3><H3>
 Call chain for Maximum Stack Depth:</H3>
 main &rArr; ui_welcome &rArr; ui_home &rArr; ui_setting &rArr;  ui_home (Cycle)
 <P>
@@ -1084,7 +1084,7 @@ Global Symbols
 <BR>[Address Reference Count : 1]<UL><LI> printfa.o(i.__0printf)
 </UL>
 <P><STRONG><a name="[35]"></a>main</STRONG> (Thumb, 100 bytes, Stack size 16 bytes, main.o(i.main))
-<BR><BR>[Stack]<UL><LI>Max Depth = 544<LI>Call Chain = main &rArr; ui_welcome &rArr; ui_home &rArr; ui_setting &rArr;  ui_home (Cycle)
+<BR><BR>[Stack]<UL><LI>Max Depth = 576<LI>Call Chain = main &rArr; ui_welcome &rArr; ui_home &rArr; ui_setting &rArr;  ui_home (Cycle)
 </UL>
 <BR>[Calls]<UL><LI><a href="#[a6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ui_welcome
 <LI><a href="#[91]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PCD_Reset
@@ -1104,8 +1104,8 @@ Global Symbols
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> entry9a.o(.ARM.Collect$$$$0000000B)
 </UL>
-<P><STRONG><a name="[a7]"></a>ui_home</STRONG> (Thumb, 436 bytes, Stack size 112 bytes, ui_home.o(i.ui_home))
-<BR><BR>[Stack]<UL><LI>Max Depth = 472<LI>Call Chain = ui_home &rArr; ui_setting &rArr;  ui_home (Cycle)
+<P><STRONG><a name="[a7]"></a>ui_home</STRONG> (Thumb, 520 bytes, Stack size 144 bytes, ui_home.o(i.ui_home))
+<BR><BR>[Stack]<UL><LI>Max Depth = 504<LI>Call Chain = ui_home &rArr; ui_setting &rArr;  ui_home (Cycle)
 </UL>
 <BR>[Calls]<UL><LI><a href="#[76]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_UART_Transmit
 <LI><a href="#[91]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PCD_Reset
@@ -1146,7 +1146,7 @@ Global Symbols
 </UL>
 
 <P><STRONG><a name="[a6]"></a>ui_welcome</STRONG> (Thumb, 400 bytes, Stack size 56 bytes, ui_welcome.o(i.ui_welcome))
-<BR><BR>[Stack]<UL><LI>Max Depth = 528<LI>Call Chain = ui_welcome &rArr; ui_home &rArr; ui_setting &rArr;  ui_home (Cycle)
+<BR><BR>[Stack]<UL><LI>Max Depth = 560<LI>Call Chain = ui_welcome &rArr; ui_home &rArr; ui_setting &rArr;  ui_home (Cycle)
 </UL>
 <BR>[Calls]<UL><LI><a href="#[84]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OLED_Clear
 <LI><a href="#[5b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_Delay
@@ -1246,7 +1246,7 @@ Local Symbols
 <BR>[Called By]<UL><LI><a href="#[a8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ui_setting
 </UL>
 
-<P><STRONG><a name="[9c]"></a>_fp_digits</STRONG> (Thumb, 366 bytes, Stack size 64 bytes, printfa.o(i._fp_digits), UNUSED)
+<P><STRONG><a name="[9c]"></a>_fp_digits</STRONG> (Thumb, 334 bytes, Stack size 56 bytes, printfa.o(i._fp_digits), UNUSED)
 <BR><BR>[Calls]<UL><LI><a href="#[4f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_ddiv
 <LI><a href="#[4b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_dadd
 <LI><a href="#[50]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_d2ulz

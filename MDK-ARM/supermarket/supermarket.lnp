@@ -29,6 +29,6 @@
 "supermarket\ui_home.o"
 "supermarket\ui_setting.o"
 --library_type=microlib --strict --scatter "supermarket\supermarket.sct"
---summary_stderr --info summarysizes --map --load_addr_map_info --xref --callgraph --symbols
+--summary_stderr --info summarysizes --map --xref --callgraph --symbols
 --info sizes --info totals --info unused --info veneers
 --list "supermarket.map" -o supermarket\supermarket.axf

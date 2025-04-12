@@ -3,72 +3,67 @@
 <pre>
 <h1>µVision Build Log</h1>
 <h2>Tool Versions:</h2>
-IDE-Version: ¦ÌVision V5.38.0.0
-Copyright (C) 2022 ARM Ltd and ARM Germany GmbH. All rights reserved.
-License Information: 123 123, 123, LIC=X96CK-Z1IKU-UH78H-WCMNB-46UJD-7EQKS
+IDE-Version: ¦ÌVision V5.14.0.0
+Copyright (C) 2015 ARM Ltd and ARM Germany GmbH. All rights reserved.
+License Information: RIO Admin, RIO, LIC=QF8PC-7RNYD-EH28P-M9RBM-C6LJL-MBQCR
  
 Tool Versions:
-Toolchain:       MDK-ARM Plus  Version: 5.38.0.0
-Toolchain Path:  D:\programFiles\KEIL5\ARM\ARMCC\Bin
-C Compiler:      Armcc.exe V5.06 update 6 (build 750)
-Assembler:       Armasm.exe V5.06 update 6 (build 750)
-Linker/Locator:  ArmLink.exe V5.06 update 6 (build 750)
-Library Manager: ArmAr.exe V5.06 update 6 (build 750)
-Hex Converter:   FromElf.exe V5.06 update 6 (build 750)
-CPU DLL:         SARMCM3.DLL V5.38.0.0
-Dialog DLL:      DCM.DLL V1.17.5.0
-Target DLL:      CMSIS_AGDI.dll V1.33.15.0
-Dialog DLL:      TCM.DLL V1.56.4.0
+Toolchain:       MDK-ARM Standard  Version: 5.14.0.0
+Toolchain Path:  C:\Keil_v5\ARM\ARMCC\Bin
+C Compiler:      Armcc.exe V5.05 update 1 (build 106)
+Assembler:       Armasm.exe V5.05 update 1 (build 106)
+Linker/Locator:  ArmLink.exe V5.05 update 1 (build 106)
+Library Manager: ArmAr.exe V5.05 update 1 (build 106)
+Hex Converter:   FromElf.exe V5.05 update 1 (build 106)
+CPU DLL:         SARMCM3.DLL V5.14.0.0
+Dialog DLL:      DCM.DLL V1.13.1.0
+Target DLL:      CMSIS_AGDI.dll V1.21.0.0
+Dialog DLL:      TCM.DLL V1.14.4.0
  
 <h2>Project:</h2>
-C:\Users\dell\Desktop\git\super_market\MDK-ARM\supermarket.uvprojx
-Project File Date:  04/01/2025
+C:\Users\Admin\Desktop\git\super_market\MDK-ARM\supermarket.uvprojx
+Project File Date:  04/12/2025
 
 <h2>Output:</h2>
-*** Using Compiler 'V5.06 update 6 (build 750)', folder: 'D:\programFiles\KEIL5\ARM\ARMCC\Bin'
 Build target 'supermarket'
-compiling ui_setting.c...
+compiling ui_home.c...
 ../app/oled.h(44): warning:  #1-D: last line of file ends without a newline
   #endif
 ..\UI\ui_setting.h(8): warning:  #1-D: last line of file ends without a newline
   #endif
 ../app/RC522.h(151): warning:  #1-D: last line of file ends without a newline
   #endif
-..\UI\ui_welcome.h(10): warning:  #1-D: last line of file ends without a newline
-  #endif
-..\UI\ui_setting.c(59): warning:  #111-D: statement is unreachable
-  								break;
-..\UI\ui_setting.c(71): warning:  #177-D: variable "mfc_id"  was declared but never referenced
-  	   rfid mfc_id;
-..\UI\ui_setting.c: 6 warnings, 0 errors
+..\UI\ui_home.c(70): warning:  #177-D: variable "price_send" was declared but never referenced
+                                                uint8_t price_send[2]={0,0};
+..\UI\ui_home.c(141): warning:  #1-D: last line of file ends without a newline
+  }
+..\UI\ui_home.c(21): warning:  #177-D: variable "show_id" was declared but never referenced
+          char show_id[20];
+..\UI\ui_home.c(25): warning:  #177-D: variable "comp_data" was declared but never referenced
+          uint8_t comp_data[4]={0xff,0xff,0xff,0xff};
+..\UI\ui_home.c: 7 warnings, 0 errors
 linking...
-Program Size: Code=13412 RO-data=8056 RW-data=112 ZI-data=2440  
+Program Size: Code=13488 RO-data=8056 RW-data=112 ZI-data=2544  
 FromELF: creating hex file...
-"supermarket\supermarket.axf" - 0 Error(s), 6 Warning(s).
+"supermarket\supermarket.axf" - 0 Error(s), 7 Warning(s).
 
 <h2>Software Packages used:</h2>
 
 Package Vendor: ARM
-                http://www.keil.com/pack/ARM.CMSIS.5.9.0.pack
-                ARM.CMSIS.5.9.0
-                CMSIS (Common Microcontroller Software Interface Standard)
-   * Component: CORE Version: 5.6.0
-
-Package Vendor: Keil
-                https://www.keil.com/pack/Keil.STM32F1xx_DFP.2.4.1.pack
-                Keil.STM32F1xx_DFP.2.4.1
-                STMicroelectronics STM32F1 Series Device Support, Drivers and Examples
+                http://www.keil.com/pack/ARM.CMSIS.4.2.0.pack
+                ARM::CMSIS:CORE:3.40.0
+                CMSIS (Cortex Microcontroller Software Interface Standard)
+   * Component: CORE Version: 3.40.0
 
 <h2>Collection of Component include folders:</h2>
-  ./RTE/_supermarket
-  C:/Users/dell/AppData/Local/Arm/Packs/ARM/CMSIS/5.9.0/CMSIS/Core/Include
-  C:/Users/dell/AppData/Local/Arm/Packs/Keil/STM32F1xx_DFP/2.4.1/Device/Include
+  C:\Users\Admin\Desktop\git\super_market\MDK-ARM\RTE
+  C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.2.0\CMSIS\Include
+  C:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.4.1
 
 <h2>Collection of Component Files used:</h2>
 
-   * Component: ARM::CMSIS:CORE:5.6.0
-      Include file:  CMSIS/Core/Include/tz_context.h
-Build Time Elapsed:  00:00:02
+   * Component: ARM::CMSIS:CORE:3.40.0
+      Source file:   CMSIS\UserCodeTemplates\ARM\ITM_Retarget.c
 </pre>
 </body>
 </html>
